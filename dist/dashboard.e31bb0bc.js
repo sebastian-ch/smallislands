@@ -33220,7 +33220,7 @@ var global = arguments[3];
 
   var mapboxgl$1 = mapboxgl;
   return mapboxgl$1;
-}); //# sourceMappingURL=mapbox-gl.js.map
+});
 },{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -33390,7 +33390,7 @@ MapboxStyleSwitcherControl.DEFAULT_STYLES = [
     { title: "Streets", uri: "mapbox://styles/mapbox/streets-v11" }
 ];
 exports.MapboxStyleSwitcherControl = MapboxStyleSwitcherControl;
-//# sourceMappingURL=index.js.map
+
 },{}],"node_modules/mapbox-gl-style-switcher/styles.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
@@ -42260,7 +42260,7 @@ map.on('style.load', function () {
       //'filter': ['!=', "null"],
       'paint': {
         'fill-color': ['interpolate', ['linear'], ['get', currentGeojsonLayers.dataLayer], currentGeojsonLayers.breaks[0], currentGeojsonLayers.color[0], currentGeojsonLayers.breaks[1], currentGeojsonLayers.color[1], currentGeojsonLayers.breaks[2], currentGeojsonLayers.color[2], currentGeojsonLayers.breaks[3], currentGeojsonLayers.color[3], currentGeojsonLayers.breaks[4], currentGeojsonLayers.color[4]],
-        'fill-opacity': 0.7
+        'fill-opacity': 0.8
       }
     }, firstSymbolId);
     map.setFilter(currentGeojsonLayers.hexSize, ['>=', currentGeojsonLayers.dataLayer, 0]);
@@ -42297,7 +42297,7 @@ button3dWrapper.addEventListener('click', function (event) {
       },
       'paint': {
         'fill-extrusion-color': ['interpolate', ['linear'], ['get', currentGeojsonLayers.dataLayer], currentGeojsonLayers.breaks[0], currentGeojsonLayers.color[0], currentGeojsonLayers.breaks[1], currentGeojsonLayers.color[1], currentGeojsonLayers.breaks[2], currentGeojsonLayers.color[2], currentGeojsonLayers.breaks[3], currentGeojsonLayers.color[3], currentGeojsonLayers.breaks[4], currentGeojsonLayers.color[4]],
-        'fill-extrusion-height': ['get', currentGeojsonLayers.dataLayer] //'fill-opacity': 0.7,
+        'fill-extrusion-height': ['get', currentGeojsonLayers.dataLayer] //'fill-opacity': 0.8,
 
       }
     }, firstSymbolId);
@@ -42381,7 +42381,7 @@ function changeHexagonSize(sel) {
 
   if (currentGeojsonLayers.breaks != null) {
     map.setPaintProperty(sel, 'fill-color', ['interpolate', ['linear'], ['get', currentGeojsonLayers.dataLayer], currentGeojsonLayers.breaks[0], currentGeojsonLayers.color[0], currentGeojsonLayers.breaks[1], currentGeojsonLayers.color[1], currentGeojsonLayers.breaks[2], currentGeojsonLayers.color[2], currentGeojsonLayers.breaks[3], currentGeojsonLayers.color[3], currentGeojsonLayers.breaks[4], currentGeojsonLayers.color[4]]);
-    map.setPaintProperty(sel, 'fill-opacity', 0.7);
+    map.setPaintProperty(sel, 'fill-opacity', 0.8);
     map.setFilter(sel, ['>=', currentGeojsonLayers.dataLayer, 0]);
   }
 }
@@ -42422,6 +42422,7 @@ function addToLayersDrop(layers) {
   layersHolder.appendChild(firstBtn);
 
   for (var x in layers) {
+    //console.log(layers[x])
     var btn = document.createElement('option');
     btn.innerHTML = layers[x].desc + ' ' + layers[x].time;
     btn.setAttribute('id', layers[x].field_name);
@@ -42480,12 +42481,31 @@ function changeDataOnMap(selection) {
       var colorRamp1 = ['#edf8fb', '#b2e2e2', '#66c2a4', '#2ca25f', '#006d2c'];
       var colorRamp2 = ['#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f'];
       var colorRamp4 = ['#ffffd4', '#fed98e', '#fe9929', '#d95f0e', '#993404'];
-      var gdpColor = ['#ca0020', '#f4a582', '#f7f7f7', '#92c5de', '#0571b0']; //console.log(colorz.classes)
+      var gdpColor = ['#ca0020', '#f4a582', '#f7f7f7', '#92c5de', '#0571b0'];
+      var pop = ['#feebe2', '#fbb4b9', '#f768a1', '#c51b8a', '#7a0177'];
+      var sunIndex = ['#fdfbf6', '#FAE7B9', '#FAE39B', '#FADE7C', '#FADA5E'];
+      var template = ['', '', '', '', ''];
+      var newSun = ['#FEF65C', '#FEE745', '#FFD82F', '#FFC918', '#FFBA01'];
+      var combo = ['#fdfbf6', '#FEE745', '#FFD82F', '#FFC918', '#FFBA01'];
+      var pinkish = ['#f8eff1', '#f1d2d4', '#e7a9b1', '#c65e6a', '#af3039'];
+      var blues = ['#ABD7EC', '#59C1E8', '#3585DA', '#1061B0', '#003C72']; //var pop1 = ['#f6eff7', '#bdc9e1', '#67a9cf', '#1c9099', '#016c59']
+      //console.log(colorz.classes)
       //var ramps = [colorRamp1, colorRamp2, colorRamp3, colorRamp4]
-      //var colorRamp = ramps[Math.floor(Math.random() * 4)];
+
+      var minty = ['#aaf0d1', '#96e6c2', '#7dd8b5', '#5ec69d', '#3eb489']; //var colorRamp = ramps[Math.floor(Math.random() * 4)];
 
       if (selection.substring(0, 2) === '1a') {
         colorRamp = gdpColor;
+      } else if (selection.substring(0, 2) === '1c') {
+        colorRamp = pop;
+      } else if (selection === '7d10') {
+        colorRamp = combo;
+      } else if (selection === '7d5') {
+        colorRamp = minty;
+      } else if (selection === '7d7') {
+        colorRamp = blues;
+      } else if (selection === '7d4') {
+        colorRamp = pinkish;
       }
 
       currentGeojsonLayers.breaks = breaks;
@@ -42501,10 +42521,10 @@ function changeDataOnMap(selection) {
         map.setFilter(currentGeojsonLayers.hexSize, ['>=', selection, 0]);
         addLegend(colorRamp, breaks, selection);
         setTimeout(function () {
-          map.setPaintProperty(currentGeojsonLayers.hexSize, 'fill-opacity', 0.7);
+          map.setPaintProperty(currentGeojsonLayers.hexSize, 'fill-opacity', 0.8);
         }, 700);
-      } //setTimeout(() => {  map.setPaintProperty(currentGeojsonLayers.hexSize,'fill-opacity', 0.7) }, 700);
-      //map.setPaintProperty(currentGeojsonLayers.hexSize,'fill-opacity', 0.7)
+      } //setTimeout(() => {  map.setPaintProperty(currentGeojsonLayers.hexSize,'fill-opacity', 0.8) }, 700);
+      //map.setPaintProperty(currentGeojsonLayers.hexSize,'fill-opacity', 0.8)
 
     }
   }
@@ -42736,10 +42756,8 @@ function addHexSource() {
         'fill-opacity': 0
       }
     }, firstSymbolId);
-
     $('.loader').remove();
   });
-  
 } /////ui js
 
 
@@ -42877,8 +42895,8 @@ $('.collapse-btn').on('click', function () {
   $('.app-body').toggleClass('collapsed');
   $(this).toggleClass('collapsed');
 }); // /** Select2 for drop downs */
+//$('.form-select').select2();
 
-$('.form-select').select2();
 /**
  * Tooltip for sdgs
 */
@@ -42956,6 +42974,17 @@ $('.button-option-select-1').on('click', function (e) {
 $('select[name="dataset-selection"]').on('change', function () {
   //console.log('Dataset: ' + $(this).val());
   //console.log(this.selectedOptions[0].id)
+  var legendTitle = document.getElementById('legendTitle');
+  var legend = document.getElementById('updateLegend');
+  legend.innerHTML = '';
+  legendTitle.innerHTML = '';
+  var infoBoxTitle = document.getElementById("infoBoxTitle");
+  var infoBoxText = document.getElementById("infoBoxText");
+  var infoBoxLink = document.getElementById("infoBoxLink");
+  infoBoxTitle.innerHTML = '';
+  infoBoxText.innerHTML = '';
+  infoBoxLink.innerHTML = '';
+
   if (this.selectedOptions[0].innerHTML === 'GDP per Capita' || this.selectedOptions[0].innerHTML === 'Population Density') {
     map.setPaintProperty(currentGeojsonLayers.hexSize, 'fill-opacity', 0.0);
     $('.year-timeline-wrapper').show();
@@ -43282,7 +43311,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52041" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54584" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -43459,3 +43488,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=dist/dashboard.e31bb0bc.js.map
