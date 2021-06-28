@@ -42736,8 +42736,10 @@ function addHexSource() {
         'fill-opacity': 0
       }
     }, firstSymbolId);
+
+    $('.loader').remove();
   });
-  $('.loader').remove();
+  
 } /////ui js
 
 
